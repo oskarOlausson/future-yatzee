@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\oskar\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\oskar\.Rider2018.2\system\resharper-host\Local\Transient\ReSharperHost\v182\SolutionCaches\_SaltoYatzee.-1262507752.00" t="ExcludeRecursive" />
+    <e p="D:\Documents\spel\SaltoYatzee" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Fonts" t="Include">
+          <e p="Raleway" t="Include">
+            <e p="OFL.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="AddToHighScore.cs" t="Include" />
+          <e p="Carry.cs" t="Include" />
+          <e p="Connections.cs" t="Include" />
+          <e p="Die.cs" t="Include" />
+          <e p="DieJump.cs" t="Include" />
+          <e p="DoneButton.cs" t="Include" />
+          <e p="Dragger.cs" t="Include" />
+          <e p="Extra.cs" t="Include" />
+          <e p="FutureDice.cs" t="Include" />
+          <e p="GoToScene.cs" t="Include" />
+          <e p="GuiDie.cs" t="Include" />
+          <e p="GuiEntry.cs" t="Include" />
+          <e p="HighScore.cs" t="Include" />
+          <e p="HighScoreTotal.cs" t="Include" />
+          <e p="OnClickListener.cs" t="Include" />
+          <e p="Result.cs" t="Include" />
+          <e p="ResultHandler.cs" t="Include" />
+          <e p="ScaleOnHover.cs" t="Include" />
+          <e p="Score.cs" t="Include" />
+          <e p="ScoreHandler.cs" t="Include" />
+          <e p="Turn.cs" t="Include" />
+          <e p="Type.cs" t="Include" />
+          <e p="TypeFunctions.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="SaltoYatzee.sln" t="IncludeFlat" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
