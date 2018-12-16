@@ -13,8 +13,10 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="AddToHighScore.cs" t="Include" />
+          <e p="AutoSave.cs" t="Include" />
           <e p="Carry.cs" t="Include" />
           <e p="Connections.cs" t="Include" />
+          <e p="Continue.cs" t="Include" />
           <e p="Die.cs" t="Include" />
           <e p="DieJump.cs" t="Include" />
           <e p="DoneButton.cs" t="Include" />
@@ -26,9 +28,12 @@
           <e p="GuiEntry.cs" t="Include" />
           <e p="HighScore.cs" t="Include" />
           <e p="HighScoreTotal.cs" t="Include" />
+          <e p="LoadAndSave.cs" t="Include" />
+          <e p="NewGame.cs" t="Include" />
           <e p="OnClickListener.cs" t="Include" />
           <e p="Result.cs" t="Include" />
           <e p="ResultHandler.cs" t="Include" />
+          <e p="SaveInfo.cs" t="Include" />
           <e p="ScaleOnHover.cs" t="Include" />
           <e p="Score.cs" t="Include" />
           <e p="ScoreHandler.cs" t="Include" />

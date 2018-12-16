@@ -1,92 +1,92 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Scripts
+public class Score : MonoBehaviour
 {
-	public class Score : MonoBehaviour
+	private TextMesh _typeText;
+	private TextMesh _pointsText;
+	private BoxCollider2D _dropZone;
+	public UnityEvent OnValueChanged = new UnityEvent();
+
+	private Type _type;
+	private uint _value;
+	private BoxCollider2D _ownCollider;
+
+	public Type MyType
 	{
-		private TextMesh _typeText;
-		private TextMesh _pointsText;
-		private BoxCollider2D _dropZone;
-		public UnityEvent OnValueChanged = new UnityEvent();
-
-		private Type _type;
-		private uint _value;
-		private BoxCollider2D _ownCollider;
-
-		public Type MyType
+		set
 		{
-			set
+			_type = value;
+			if (_typeText)
 			{
-				_type = value;
-				if (_typeText)
-				{
-					_typeText.text = TypeFunctions.NameOf(_type);	
-				}
+				_typeText.text = TypeFunctions.NameOf(_type);
+				name = _typeText.text;
 			}
 		}
+	}
 		
-		private void Start()
-		{
-			var meshes = GetComponentsInChildren<TextMesh>();
-			_typeText = meshes[0];
-			_typeText.text = TypeFunctions.NameOf(_type);
+	private void Start()
+	{
+		var meshes = GetComponentsInChildren<TextMesh>();
+		_typeText = meshes[0];
+		_typeText.text = TypeFunctions.NameOf(_type);
+		name = _typeText.text;
 			
-			_pointsText = meshes[1];
-			_pointsText.text = "" + _value;
+		_pointsText = meshes[1];
+		_pointsText.text = "" + _value;
 
-			var colliders = GetComponentsInChildren<BoxCollider2D>();
+		_dropZone = GetComponent<BoxCollider2D>();
+		UnSelect();
+	}
 
-			_ownCollider = colliders[0];
-			_dropZone = colliders[1];
-			UnSelect();
-		}
-
-		public uint Points
+	public uint Points
+	{
+		set
 		{
-			set
+			_value = value;
+			if (_pointsText)
 			{
-				_value = value;
-				if (_pointsText)
-				{
-					_pointsText.text = "" + value;
-				}
-			}
-
-			get
-			{
-				return _value;
+				_pointsText.text = "" + value;
 			}
 		}
+
+		get
+		{
+			return _value;
+		}
+	}
 		
-		
+	public void UpdateValues(uint[] values)
+	{
+		Points =  TypeFunctions.PointsFor(values, _type);
+		OnValueChanged.Invoke();
+	}
 
-		public void UpdateValues(uint[] values)
-		{
-			Points =  TypeFunctions.PointsFor(values, _type);
-			OnValueChanged.Invoke();
-		}
+	public void UnSelect()
+	{
+		_pointsText.text = "-";
+		_value = 0;
+		OnValueChanged.Invoke();
+	}
 
-		public void UnSelect()
-		{
-			_pointsText.text = "-";
-			_value = 0;
-			OnValueChanged.Invoke();
-		}
+	public BoxCollider2D DropZoneCollider()
+	{
+		return _dropZone;
+	}
 
-		public BoxCollider2D DropZoneCollider()
-		{
-			return _dropZone;
-		}
+	private void OnMouseUpAsButton()
+	{
+		var resultHandler = FindObjectOfType<ResultHandler>();
+		var selected = resultHandler.Selected;
 
-		public BoxCollider2D OwnCollider()
+		if (selected)
 		{
-			return _ownCollider;
+			resultHandler.Connect(selected, this);
 		}
+	}
 
-		public Vector3 DropZonePosition()
-		{
-			return _dropZone.gameObject.transform.position;
-		}
+	public Vector3 DropZonePosition()
+	{
+		return transform.GetChild(0).position;
 	}
 }

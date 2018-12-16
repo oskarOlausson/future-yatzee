@@ -2,73 +2,50 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace Scripts
+public class Dragger : MonoBehaviour
 {
-    public class Dragger : MonoBehaviour
+    public Result Dragging;
+    private Camera _camera;
+    private ScoreHandler _scores;
+    private ResultHandler _results;
+
+    private void Start()
     {
-        public Result Dragging;
-        private Camera _camera;
-        private ScoreHandler _scores;
-        private ResultHandler _results;
+        _camera = Camera.main;
+        _scores = FindObjectOfType<ScoreHandler>();
+        _results = FindObjectOfType<ResultHandler>();
+        Assert.IsNotNull(_camera, "No camera in scene");
+    }
 
-        private void Start()
+    private void Update()
+    {
+        if (Dragging)
         {
-            _camera = Camera.main;
-            _scores = FindObjectOfType<ScoreHandler>();
-            _results = FindObjectOfType<ResultHandler>();
-            Assert.IsNotNull(_camera, "No camera in scene");
-        }
-
-        private void Update()
-        {
-            if (Dragging)
-            {
-                var mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
-                mousePos.z = Dragging.transform.position.z;
+            var mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = Dragging.transform.position.z;
                 
-                Dragging.Follow(mousePos);
+            Dragging.MoveTo(mousePos);
 
-                if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0))
+            {
+                var score = GetDropZoneAtPosition(mousePos);
+
+                if (score)
                 {
-                    var score = GetDropZoneAtPosition(mousePos);
-
-                    if (score)
-                    {
-                        _results.Connect(Dragging, score);
-                    }
-                    else
-                    {
-                        _results.Disconnect(Dragging);
-                    }
-
-                    Dragging = null;
+                    _results.Connect(Dragging, score);
                 }
+                else
+                {
+                    _results.Disconnect(Dragging);
+                }
+
+                Dragging = null;
             }
         }
+    }
 
-        private Score GetDropZoneAtPosition(Vector3 position)
-        {
-            foreach (var score in _scores.GetScores())
-            {
-                var zone = score.DropZoneCollider();
-
-                if (zone.OverlapPoint(position))
-                {
-                    return score;
-                }
-            }
-            
-            foreach (var score in _scores.GetScores())
-            {
-                var zone = score.OwnCollider();
-
-                if (zone.OverlapPoint(position))
-                {
-                    return score;
-                }
-            }
-
-            return null;
-        }
+    private Score GetDropZoneAtPosition(Vector3 position)
+    {
+        return (from score in _scores.GetScores() let zone = score.DropZoneCollider() where zone.OverlapPoint(position) select score).FirstOrDefault();
     }
 }

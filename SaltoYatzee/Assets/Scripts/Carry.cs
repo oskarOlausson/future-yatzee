@@ -1,7 +1,4 @@
-namespace Scripts
+public static class Carry
 {
-    public static class Carry
-    {
-        public static uint Points;
-    }
+    public static uint Points;
 }

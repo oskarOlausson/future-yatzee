@@ -1,24 +1,21 @@
 ﻿using UnityEngine;
 
-namespace Scripts
+public class GuiEntry : MonoBehaviour
 {
-	public class GuiEntry : MonoBehaviour
-	{
-		private TextMesh _text;
+	private TextMesh _text;
 	
-		private void Awake ()
-		{
-			_text = GetComponentInChildren<TextMesh>();
-		}
+	private void Awake ()
+	{
+		_text = GetComponentInChildren<TextMesh>();
+	}
 
-		public void UpdateEntry(string hName, uint value)
-		{
-			_text.text = hName + " " + value;
-		}
+	public void UpdateEntry(string hName, uint value)
+	{
+		_text.text = hName + " " + value;
+	}
 
-		public void Clear()
-		{
-			_text.text = "";
-		}
+	public void Clear()
+	{
+		_text.text = "";
 	}
 }
